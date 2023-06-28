@@ -1,12 +1,27 @@
-// Write your code here
 import {Component} from 'react'
 import './index.css'
 
 class Welcome extends Component {
-  state = {text: 'Subscribe'}
+  state = {text: true}
 
   onButtons = () => {
-    this.setState({text: 'Subscribed'})
+    this.setState(prevState => ({text: !prevState.text}))
+  }
+
+  onAuthButton = () => {
+    const {text} = this.state
+    if (text) {
+      return (
+        <button type="button" className="button" onClick={this.onButtons}>
+          Subscribe
+        </button>
+      )
+    }
+    return (
+      <button type="button" className="button" onClick={this.onButtons}>
+        Subscribed
+      </button>
+    )
   }
 
   render() {
@@ -16,11 +31,7 @@ class Welcome extends Component {
       <div className="container">
         <h1 className="heading">Welcome</h1>
         <p className="description">Thank you! Happy Learning</p>
-        <div>
-          <button type="button" className="button" onClick={this.onButtons}>
-            {text}
-          </button>
-        </div>
+        <div>{this.onAuthButton()}</div>
       </div>
     )
   }
